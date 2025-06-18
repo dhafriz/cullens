@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Getaran-Getaran Alam dan Struktur Interior Planet</title>
+  <style>
+    /* ===== Reset & Base ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #f0f9ff, #e0f2fe);
+      color: #0f172a;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ===== Header ===== */
+    header {
+      text-align: center;
+      background: #0f172a;
+      color: #ffffff;
+      padding: 2rem 1rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    header p {
+      font-size: 1rem;
+      opacity: 0.9;
+      margin-top: 0.3rem;
+    }
+
+    /* ===== Main Content ===== */
+    main {
+      flex: 1;
+      max-width: 800px;
+      width: 100%;
+      margin: auto;
+      padding: 2rem 1rem;
+    }
+    section.topic {
+      margin-bottom: 3rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    section.topic.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    section.topic h2 {
+      font-size: 1.5rem;
+      color: #0284c7;
+      margin-bottom: 0.5rem;
+      position: relative;
+    }
+    section.topic h2::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 40px;
+      height: 3px;
+      background: #38bdf8;
+      border-radius: 2px;
+    }
+    section.topic p {
+      margin-top: 0.5rem;
+      background: #ffffffd2;
+      padding: 1rem;
+      border-left: 4px solid #38bdf8;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    section.topic p:hover {
+      transform: scale(1.02);
+    }
+    /* Subtopics under Struktur Bumi */
+    section.topic.subtopic h3 {
+      font-size: 1.25rem;
+      color: #0369a1;
+      margin-top: 1.5rem;
+      margin-bottom: 0.3rem;
+      position: relative;
+    }
+    section.topic.subtopic h3::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 30px;
+      height: 2px;
+      background: #38bdf8;
+      border-radius: 2px;
+    }
+    /* Image styling */
+    .illustration {
+      max-width: 100%;
+      margin: 1rem 0;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      display: block;
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: #0f172a;
+      color: #ffffff;
+      margin-top: auto;
+    }
+    footer p {
+      opacity: 0.9;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.4rem;
+      }
+      section.topic h2 {
+        font-size: 1.3rem;
+      }
+      section.topic p {
+        font-size: 0.95rem;
+      }
+      section.topic.subtopic h3 {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>GETARAN-GETARAN ALAM DAN STRUKTUR INTERIOR PLANET</h1>
+    <p>Muhammad Harrist Alfarisy, 140710240010</p>
+    <p>Ahmad Fadhil Ramadhan, 140710240051</p>
+  </header>
+
+  <main>
+    <!-- Topik Gempa -->
+    <section id="gempa" class="topic">
+      <h2>Gempa</h2>
+      <p>
+        Gempa bumi adalah peristiwa alam berupa getaran atau
+        guncangan yang terjadi di permukaan tanah akibat pelepasan energi secara
+        tiba-tiba di bawah litosfer sehingga menimbulkan gelombang seismik. Titik
+        awal gempa disebut hiposenter , sedangkan permukaan tanah yang berada tepat
+        di atasnya disebut episentrum. Gempa bumi dapat disebabkan oleh kesalahan
+        geologis, atau oleh aktivitas gunung berapi, tanah longsor, dan peristiwa
+        lainnya. Gempa bumi menimbulkan berbagai dampak, seperti guncangan tanah
+        dan pencairan tanah, yang mengakibatkan kerusakan besar dan korban jiwa.
+        Jika episentrum gempa besar terletak di lepas pantai, dasar laut mungkin
+        akan mengalami pergeseran yang cukup besar sehingga menyebabkan tsunami.
+        Gempa bumi juga dapat memicu tanah longsor. Gempa bumi dipengaruhi oleh
+        pergerakan lempeng tektonik di sepanjang sesar aktif, termasuk sesar
+        normal, sesar terbalik (dorong), dan sesar mendatar, dengan dinamika
+        pelepasan energi dan patahan yang diatur oleh teori pantulan elastis.
+      </p>
+    </section>
+
+    <!-- Topik Gelombang Seismik -->
+    <section id="gelombang-seismik" class="topic">
+      <h2>Gelombang Seismik</h2>
+      <p>
+        Gelombang seismik adalah gelombang mekanis energi
+        akustik yang bergerak melalui Bumi atau benda angkasa lain . Gelombang ini
+        dapat disebabkan oleh gempa bumi (atau secara umum, gempa bumi ), letusan
+        gunung berapi , pergerakan magma , tanah longsor besar , dan ledakan besar
+        buatan manusia yang menghasilkan energi akustik frekuensi rendah. Gelombang
+        seismik dipelajari oleh seismolog , yang merekam gelombang menggunakan
+
+        seismometer , hidrofon (di dalam air), atau akselerometer . Terdapat 2
+        jenis gelombang ,yaitu gelombang P (Primer) yang merambat dengan cepat, dan
+        bisa merambat melalui padatan dan cairan. Sedangkan gelombang S (Sekunder)
+        bersifat lebih lambat, dan hanya merambat melalui padatan. Gelombang
+        seismik dibedakan dari kebisingan seismik (getaran sekitar), yang merupakan
+        getaran amplitudo rendah yang terus-menerus yang timbul dari berbagai
+        sumber alami dan antropogenik. Kecepatan perambatan gelombang seismik
+        bergantung pada kepadatan dan elastisitas medium serta jenis gelombang.
+        Kecepatan cenderung meningkat seiring dengan kedalaman melalui kerak dan
+        mantel Bumi , tetapi menurun tajam dari mantel ke inti luar Bumi
+        Dalam geofisika, refraksi atau refleksi gelombang seismik digunakan untuk
+        meneliti struktur internal Bumi.
+      </p>
+    </section>
+
+    <!-- Topik Struktur Bumi -->
+    <section id="struktur-bumi" class="topic">
+      <h2>Struktur Bumi</h2>
+      <!-- Subtopik Kerak Bumi -->
+      <section class="subtopic">
+        <h3>Kerak Bumi</h3>
+        <p>
+          Kerak Bumi adalah lapisan terluar bumi yang
+          terbagi menjadi dua kategori, yaitu kerak samudera dan kerak benua. Kerak
+          samudra mempunyai ketebalan sekitar 5–10 km sedangkan kerak benua mempunyai
+          ketebalan sekitar 20–70 km. Penyusun kerak samudra yang utama adalah batuan
+          basal, sedangkan batuan penyusun kerak benua yang utama adalah granit, yang
+          tidak sepadat batuan basal.
+        </p>
+      </section>
+
+      <!-- Subtopik Mantel Bumi -->
+      <section class="subtopic">
+        <h3>Mantel Bumi</h3>
+        <p>
+          Mantel bumi merupakan lapisan yang menyelubungi
+          inti bumi dan merupakan bagian terbesar dari bagian bumi sekitar 83,2
+          persen dari volume dan 67,8 persen dari keseluruhan masa bumi.
+        </p>
+        <!-- Gambar ilustrasi; src tetap sama seperti semula -->
+        <img src="assets/" class="illustration" alt="Ilustrasi Mantel Bumi" />
+      </section>
+
+      <!-- Subtopik Inti Bumi -->
+      <section class="subtopic">
+        <h3>Inti Bumi</h3>
+        <p>
+          Inti bumi terletak pada kedalaman sekitar 2900
+          km dari dasar kerak bumi sampai ke pusat bumi. Inti bumi dapat dipisahkan
+          menjadi inti bumi bagian luar dan inti bumi bagian dalam. Inti bagian luar
+          merupakan struktur cair yang terdiri dari besi dan nikel. Inti bagian luar
+          ini berada di kedalaman 2.885-5.144 kilometer. Suhu pada lapisan ini
+          mencapai 3.700 derajat Celcius. Sedangkan inti bagian dalam bumi berbentuk
+          bola metal yang memiliki radius 1.220 kilometer atau sekitar tiga per empat
+          ukuran bulan. Inti bagian dalam terletak di dalam bumi pada kedalaman
+          2.885-5.144 kilometer di bawah permukaan bumi. Suhu di inti bagian dalam
+          bumi berkisar 4.300-5.400 derajat Celcius. Suhu ini hampir sepanas suhu
+          permukaan matahari.
+        </p>
+      </section>
+    </section>
+  </main>
+
+  <footer>
+    <p>terimakasih atas perhatiannya, dan mohon maaf atas segala kesalahan pengucapan</p>
+  </footer>
+
+  <script>
+    // Fade-in tiap section saat scroll
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('section.topic, section.subtopic');
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2, rootMargin: "0px 0px -50px 0px" });
+      sections.forEach(sec => observer.observe(sec));
+    });
+  </script>
+
+</body>
+</html>
