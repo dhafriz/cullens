@@ -4,273 +4,1133 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Getaran-Getaran Alam dan Struktur Interior Planet</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
   <style>
-    /* ===== Reset & Base ===== */
+    /* ===== VARIABEL & RESET ===== */
+    :root {
+      --primary: #0f172a;
+      --secondary: #0284c7;
+      --accent: #38bdf8;
+      --light: #f0f9ff;
+      --dark: #0c1221;
+      --text: #0f172a;
+      --text-light: #64748b;
+      --white: #ffffff;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      --shadow-hover: 0 15px 35px rgba(0, 0, 0, 0.15);
+    }
+    
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+    
     html {
       scroll-behavior: smooth;
     }
+    
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom, #f0f9ff, #e0f2fe);
-      color: #0f172a;
-      line-height: 1.6;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f0f9ff, #e0f2fe, #cffafe);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
     }
-    a {
-      color: inherit;
-      text-decoration: none;
+    
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
-
-    /* ===== Header ===== */
+    
+    /* ===== HEADER & NAVBAR ===== */
     header {
-      text-align: center;
-      background: #0f172a;
-      color: #ffffff;
-      padding: 2rem 1rem;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      background: linear-gradient(135deg, var(--primary), #1e293b);
+      color: var(--white);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
     }
-    header h1 {
-      font-size: 2rem;
+    
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .logo-icon {
+      font-size: 2.2rem;
+      color: var(--accent);
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    
+    .logo-text {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    
+    .logo-text span {
+      color: var(--accent);
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+    
+    nav a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
+      transition: var(--transition);
+      position: relative;
+    }
+    
+    nav a:hover {
+      color: var(--accent);
+      background: rgba(255, 255, 255, 0.1);
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: var(--transition);
+      transform: translateX(-50%);
+    }
+    
+    nav a:hover::after {
+      width: 70%;
+    }
+    
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    
+    /* ===== HERO SECTION ===== */
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      padding: 4rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1193&q=80') center/cover no-repeat;
+      opacity: 0.1;
+      z-index: -1;
+    }
+    
+    .hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .hero h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+      background: linear-gradient(to right, var(--white), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: fadeInUp 1s ease;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.5rem;
+      max-width: 800px;
+      margin: 0 auto 2.5rem;
+      color: var(--white);
+      opacity: 0.9;
+      animation: fadeInUp 1s ease 0.2s forwards;
+      opacity: 0;
+    }
+    
+    .authors {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      animation: fadeInUp 1s ease 0.4s forwards;
+      opacity: 0;
+    }
+    
+    .author-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: var(--transition);
+    }
+    
+    .author-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-hover);
+    }
+    
+    .author-card h3 {
+      color: var(--accent);
       margin-bottom: 0.5rem;
     }
-    header p {
-      font-size: 1rem;
-      opacity: 0.9;
-      margin-top: 0.3rem;
-    }
-
-    /* ===== Main Content ===== */
-    main {
-      flex: 1;
-      max-width: 800px;
-      width: 100%;
-      margin: auto;
-      padding: 2rem 1rem;
-    }
-    section.topic {
-      margin-bottom: 3rem;
+    
+    .hero-btn {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--white);
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: var(--transition);
+      box-shadow: 0 5px 15px rgba(56, 189, 248, 0.4);
+      animation: fadeInUp 1s ease 0.6s forwards;
       opacity: 0;
-      transform: translateY(20px);
+    }
+    
+    .hero-btn:hover {
+      background: var(--secondary);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(2, 132, 199, 0.5);
+    }
+    
+    /* ===== MAIN CONTENT ===== */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+    
+    .section-title h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.5rem;
+      display: inline-block;
+      background: linear-gradient(to right, var(--secondary), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 1.5rem;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(to right, var(--secondary), var(--accent));
+      border-radius: 2px;
+    }
+    
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 5rem;
+    }
+    
+    .topic-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      transform: translateY(50px);
+      opacity: 0;
+    }
+    
+    .topic-card.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    
+    .topic-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-hover);
+    }
+    
+    .card-header {
+      background: linear-gradient(135deg, var(--primary), var(--dark));
+      color: var(--white);
+      padding: 1.5rem;
+      position: relative;
+    }
+    
+    .card-header h3 {
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .card-icon {
+      font-size: 1.8rem;
+      color: var(--accent);
+    }
+    
+    .card-content {
+      padding: 2rem;
+    }
+    
+    .card-content p {
+      margin-bottom: 1.5rem;
+      color: var(--text);
+    }
+    
+    .fact-box {
+      background: rgba(56, 189, 248, 0.1);
+      border-left: 4px solid var(--accent);
+      padding: 1rem;
+      border-radius: 0 8px 8px 0;
+      margin: 1.5rem 0;
+    }
+    
+    .topic-image {
+      width: 100%;
+      height: 200px;
+      background: var(--light);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin: 1.5rem 0;
+    }
+    
+    .topic-image i {
+      font-size: 4rem;
+      color: var(--accent);
+      opacity: 0.3;
+    }
+    
+    .subtopics {
+      margin-top: 1.5rem;
+    }
+    
+    .subtopic-card {
+      background: rgba(240, 249, 255, 0.7);
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin: 1.2rem 0;
+      border: 1px solid rgba(2, 132, 199, 0.2);
+      transition: var(--transition);
+    }
+    
+    .subtopic-card:hover {
+      border-color: var(--accent);
+      transform: translateX(10px);
+    }
+    
+    .subtopic-card h4 {
+      font-size: 1.3rem;
+      color: var(--secondary);
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .subtopic-icon {
+      color: var(--accent);
+    }
+    
+    /* ===== INTERACTIVE SECTION ===== */
+    .interactive-section {
+      background: linear-gradient(135deg, var(--primary), #1e293b);
+      padding: 5rem 2rem;
+      margin: 5rem 0;
+      border-radius: 20px;
+      color: var(--white);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .interactive-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://images.unsplash.com/photo-1542273917363-3b1817f1a2ec?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1174&q=80') center/cover no-repeat;
+      opacity: 0.2;
+      z-index: 0;
+    }
+    
+    .interactive-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .earth-model {
+      width: 300px;
+      height: 300px;
+      margin: 2rem auto;
+      position: relative;
+      perspective: 1000px;
+    }
+    
+    .earth-sphere {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: rotateEarth 20s infinite linear;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #1e88e5, #0d47a1);
+      box-shadow: 0 0 50px rgba(56, 189, 248, 0.6);
+    }
+    
+    .core, .mantle, .crust {
+      position: absolute;
+      border-radius: 50%;
+      transform-style: preserve-3d;
+    }
+    
+    .core {
+      width: 80px;
+      height: 80px;
+      top: 50%;
+      left: 50%;
+      margin: -40px 0 0 -40px;
+      background: radial-gradient(circle at 30% 30%, #ff5722, #e64a19);
+      box-shadow: 0 0 20px rgba(255, 87, 34, 0.7);
+    }
+    
+    .mantle {
+      width: 200px;
+      height: 200px;
+      top: 50%;
+      left: 50%;
+      margin: -100px 0 0 -100px;
+      background: radial-gradient(circle at 30% 30%, #ff9800, #f57c00);
+      opacity: 0.7;
+    }
+    
+    .crust {
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle at 30% 30%, #4caf50, #2e7d32);
+      opacity: 0.5;
+    }
+    
+    .layer-labels {
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      color: var(--white);
+      font-weight: bold;
+      text-shadow: 0 0 5px rgba(0,0,0,0.7);
+    }
+    
+    .label-core { top: 35%; }
+    .label-mantle { top: 50%; }
+    .label-crust { top: 65%; }
+    
+    @keyframes rotateEarth {
+      0% { transform: rotateY(0); }
+      100% { transform: rotateY(360deg); }
+    }
+    
+    /* ===== FACTS SECTION ===== */
+    .facts-section {
+      margin: 5rem 0;
+    }
+    
+    .facts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    
+    .fact-card {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border-top: 4px solid var(--accent);
+    }
+    
+    .fact-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-hover);
+    }
+    
+    .fact-icon {
+      font-size: 3rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    
+    .fact-card h4 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: var(--secondary);
+    }
+    
+    /* ===== FOOTER ===== */
+    footer {
+      background: linear-gradient(to right, var(--primary), var(--dark));
+      color: var(--white);
+      padding: 4rem 2rem 2rem;
+      position: relative;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+    }
+    
+    .footer-section h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--accent);
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+    
+    .footer-section h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: var(--accent);
+    }
+    
+    .footer-links {
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: 0.8rem;
+    }
+    
+    .footer-links a {
+      color: var(--light);
+      text-decoration: none;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .footer-links a:hover {
+      color: var(--accent);
+      transform: translateX(5px);
+    }
+    
+    .footer-social {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    
+    .social-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--white);
+      transition: var(--transition);
+      font-size: 1.2rem;
+    }
+    
+    .social-icon:hover {
+      background: var(--accent);
+      transform: translateY(-5px);
+    }
+    
+    .copyright {
+      text-align: center;
+      padding-top: 3rem;
+      margin-top: 3rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-light);
+    }
+    
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
       transition: opacity 0.6s ease, transform 0.6s ease;
     }
-    section.topic.visible {
+    
+    .animate-on-scroll.visible {
       opacity: 1;
       transform: translateY(0);
     }
-    section.topic h2 {
-      font-size: 1.5rem;
-      color: #0284c7;
-      margin-bottom: 0.5rem;
-      position: relative;
-    }
-    section.topic h2::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: -4px;
-      width: 40px;
-      height: 3px;
-      background: #38bdf8;
-      border-radius: 2px;
-    }
-    section.topic p {
-      margin-top: 0.5rem;
-      background: #ffffffd2;
-      padding: 1rem;
-      border-left: 4px solid #38bdf8;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
-    }
-    section.topic p:hover {
-      transform: scale(1.02);
-    }
-    /* Subtopics under Struktur Bumi */
-    section.topic.subtopic h3 {
-      font-size: 1.25rem;
-      color: #0369a1;
-      margin-top: 1.5rem;
-      margin-bottom: 0.3rem;
-      position: relative;
-    }
-    section.topic.subtopic h3::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: -3px;
-      width: 30px;
-      height: 2px;
-      background: #38bdf8;
-      border-radius: 2px;
-    }
-    /* Image styling */
-    .illustration {
-      max-width: 100%;
-      margin: 1rem 0;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      display: block;
-    }
-
-    /* ===== Footer ===== */
-    footer {
-      text-align: center;
-      padding: 1.5rem;
-      background: #0f172a;
-      color: #ffffff;
-      margin-top: auto;
-    }
-    footer p {
-      opacity: 0.9;
-    }
-
-    /* ===== Responsive ===== */
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 1.4rem;
+    
+    /* ===== RESPONSIVE DESIGN ===== */
+    @media (max-width: 992px) {
+      .hero h1 {
+        font-size: 3rem;
       }
-      section.topic h2 {
-        font-size: 1.3rem;
+      
+      .topics-grid {
+        grid-template-columns: 1fr;
       }
-      section.topic p {
-        font-size: 0.95rem;
+    }
+    
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
       }
-      section.topic.subtopic h3 {
-        font-size: 1.1rem;
+      
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .hero-subtitle {
+        font-size: 1.2rem;
+      }
+      
+      .authors {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .earth-model {
+        width: 250px;
+        height: 250px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      
+      .section-title h2 {
+        font-size: 2rem;
+      }
+      
+      .earth-model {
+        width: 200px;
+        height: 200px;
       }
     }
   </style>
 </head>
 <body>
 
+  <!-- Header & Navigation -->
   <header>
-    <h1>GETARAN-GETARAN ALAM DAN STRUKTUR INTERIOR PLANET</h1>
-    <p>Muhammad Harrist Alfarisy, 140710240010</p>
-    <p>Ahmad Fadhil Ramadhan, 140710240051</p>
+    <div class="header-container">
+      <div class="logo">
+        <i class="fas fa-globe-americas logo-icon"></i>
+        <div class="logo-text">Geo<span>Science</span></div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#home"><i class="fas fa-home"></i> Beranda</a></li>
+          <li><a href="#gempa"><i class="fas fa-quake"></i> Gempa</a></li>
+          <li><a href="#gelombang"><i class="fas fa-wave-square"></i> Gelombang</a></li>
+          <li><a href="#struktur"><i class="fas fa-layer-group"></i> Struktur Bumi</a></li>
+          <li><a href="#interaktif"><i class="fas fa-cube"></i> Interaktif</a></li>
+        </ul>
+      </nav>
+      <button class="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
   </header>
 
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>Getaran-Getaran Alam dan Struktur Interior Planet</h1>
+      <p class="hero-subtitle">Eksplorasi fenomena geologis yang membentuk planet kita dan memahami dinamika interior bumi melalui analisis gelombang seismik</p>
+      
+      <div class="authors">
+        <div class="author-card">
+          <h3><i class="fas fa-user-graduate"></i> Muhammad Harrist Alfarisy</h3>
+          <p>140710240010</p>
+        </div>
+        <div class="author-card">
+          <h3><i class="fas fa-user-graduate"></i> Ahmad Fadhil Ramadhan</h3>
+          <p>140710240051</p>
+        </div>
+      </div>
+      
+      <a href="#gempa" class="hero-btn">Mulai Eksplorasi <i class="fas fa-arrow-down"></i></a>
+    </div>
+  </section>
+
+  <!-- Main Content -->
   <main>
-    <!-- Topik Gempa -->
-    <section id="gempa" class="topic">
-      <h2>Gempa</h2>
-      <p>
-        Gempa bumi adalah peristiwa alam berupa getaran atau
-        guncangan yang terjadi di permukaan tanah akibat pelepasan energi secara
-        tiba-tiba di bawah litosfer sehingga menimbulkan gelombang seismik. Titik
-        awal gempa disebut hiposenter , sedangkan permukaan tanah yang berada tepat
-        di atasnya disebut episentrum. Gempa bumi dapat disebabkan oleh kesalahan
-        geologis, atau oleh aktivitas gunung berapi, tanah longsor, dan peristiwa
-        lainnya. Gempa bumi menimbulkan berbagai dampak, seperti guncangan tanah
-        dan pencairan tanah, yang mengakibatkan kerusakan besar dan korban jiwa.
-        Jika episentrum gempa besar terletak di lepas pantai, dasar laut mungkin
-        akan mengalami pergeseran yang cukup besar sehingga menyebabkan tsunami.
-        Gempa bumi juga dapat memicu tanah longsor. Gempa bumi dipengaruhi oleh
-        pergerakan lempeng tektonik di sepanjang sesar aktif, termasuk sesar
-        normal, sesar terbalik (dorong), dan sesar mendatar, dengan dinamika
-        pelepasan energi dan patahan yang diatur oleh teori pantulan elastis.
-      </p>
+    <!-- Gempa Section -->
+    <section id="gempa">
+      <div class="section-title">
+        <h2><i class="fas fa-quake"></i> Gempa Bumi</h2>
+        <p>Fenomena alam yang membentuk permukaan bumi</p>
+      </div>
+      
+      <div class="topics-grid">
+        <div class="topic-card animate-on-scroll">
+          <div class="card-header">
+            <h3><i class="fas fa-map-marker-alt card-icon"></i> Apa Itu Gempa Bumi?</h3>
+            <p>Pemahaman dasar tentang gempa</p>
+          </div>
+          <div class="card-content">
+            <p>
+              Gempa bumi adalah peristiwa alam berupa getaran atau guncangan yang terjadi di permukaan tanah akibat pelepasan energi secara tiba-tiba di bawah litosfer sehingga menimbulkan gelombang seismik. Titik awal gempa disebut hiposenter, sedangkan permukaan tanah yang berada tepat di atasnya disebut episentrum.
+            </p>
+            
+            <div class="fact-box">
+              <p><strong>Fakta Menarik:</strong> Gempa terkuat yang pernah tercatat adalah gempa Valdivia di Chili pada tahun 1960 dengan magnitudo 9.5, yang menyebabkan tsunami yang menyebar hingga ke Jepang dan Filipina.</p>
+            </div>
+            
+            <div class="topic-image">
+              <i class="fas fa-earth-americas"></i>
+            </div>
+            
+            <p>
+              Gempa bumi dapat disebabkan oleh kesalahan geologis, atau oleh aktivitas gunung berapi, tanah longsor, dan peristiwa lainnya. Gempa bumi menimbulkan berbagai dampak, seperti guncangan tanah dan pencairan tanah, yang mengakibatkan kerusakan besar dan korban jiwa.
+            </p>
+          </div>
+        </div>
+        
+        <div class="topic-card animate-on-scroll">
+          <div class="card-header">
+            <h3><i class="fas fa-wave-square card-icon"></i> Dampak & Klasifikasi</h3>
+            <p>Bagaimana gempa diklasifikasikan dan dampaknya</p>
+          </div>
+          <div class="card-content">
+            <p>
+              Jika episentrum gempa besar terletak di lepas pantai, dasar laut mungkin akan mengalami pergeseran yang cukup besar sehingga menyebabkan tsunami. Gempa bumi juga dapat memicu tanah longsor. Gempa bumi dipengaruhi oleh pergerakan lempeng tektonik di sepanjang sesar aktif.
+            </p>
+            
+            <div class="subtopics">
+              <div class="subtopic-card">
+                <h4><i class="fas fa-ruler-combined subtopic-icon"></i> Skala Pengukuran</h4>
+                <p>Gempa diukur dengan dua skala utama: Richter (magnitudo) dan Mercalli (intensitas). Skala Richter mengukur energi yang dilepaskan, sementara skala Mercalli mengamati efek yang dirasakan di permukaan.</p>
+              </div>
+              
+              <div class="subtopic-card">
+                <h4><i class="fas fa-tint subtopic-icon"></i> Pencairan Tanah</h4>
+                <p>Fenomena likuifaksi terjadi ketika tanah jenuh air kehilangan kekuatan dan kekakuan karena tekanan gempa, berperilaku seperti cairan kental yang dapat menyebabkan bangunan tenggelam atau miring.</p>
+              </div>
+            </div>
+            
+            <p>
+              Gempa bumi diklasifikasikan berdasarkan kedalaman hiposenter: dangkal (0-70 km), menengah (70-300 km), dan dalam (300-700 km). Gempa dangkal biasanya lebih merusak karena lebih dekat ke permukaan.
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
-
-    <!-- Topik Gelombang Seismik -->
-    <section id="gelombang-seismik" class="topic">
-      <h2>Gelombang Seismik</h2>
-      <p>
-        Gelombang seismik adalah gelombang mekanis energi
-        akustik yang bergerak melalui Bumi atau benda angkasa lain . Gelombang ini
-        dapat disebabkan oleh gempa bumi (atau secara umum, gempa bumi ), letusan
-        gunung berapi , pergerakan magma , tanah longsor besar , dan ledakan besar
-        buatan manusia yang menghasilkan energi akustik frekuensi rendah. Gelombang
-        seismik dipelajari oleh seismolog , yang merekam gelombang menggunakan
-
-        seismometer , hidrofon (di dalam air), atau akselerometer . Terdapat 2
-        jenis gelombang ,yaitu gelombang P (Primer) yang merambat dengan cepat, dan
-        bisa merambat melalui padatan dan cairan. Sedangkan gelombang S (Sekunder)
-        bersifat lebih lambat, dan hanya merambat melalui padatan. Gelombang
-        seismik dibedakan dari kebisingan seismik (getaran sekitar), yang merupakan
-        getaran amplitudo rendah yang terus-menerus yang timbul dari berbagai
-        sumber alami dan antropogenik. Kecepatan perambatan gelombang seismik
-        bergantung pada kepadatan dan elastisitas medium serta jenis gelombang.
-        Kecepatan cenderung meningkat seiring dengan kedalaman melalui kerak dan
-        mantel Bumi , tetapi menurun tajam dari mantel ke inti luar Bumi
-        Dalam geofisika, refraksi atau refleksi gelombang seismik digunakan untuk
-        meneliti struktur internal Bumi.
-      </p>
+    
+    <!-- Gelombang Seismik Section -->
+    <section id="gelombang">
+      <div class="section-title">
+        <h2><i class="fas fa-wave-square"></i> Gelombang Seismik</h2>
+        <p>Mekanisme rambatan energi melalui bumi</p>
+      </div>
+      
+      <div class="topics-grid">
+        <div class="topic-card animate-on-scroll">
+          <div class="card-header">
+            <h3><i class="fas fa-satellite-dish card-icon"></i> Gelombang Seismik</h3>
+            <p>Pengantar gelombang seismik</p>
+          </div>
+          <div class="card-content">
+            <p>
+              Gelombang seismik adalah gelombang mekanis energi akustik yang bergerak melalui Bumi atau benda angkasa lain. Gelombang ini dapat disebabkan oleh gempa bumi (atau secara umum, gempa bumi), letusan gunung berapi, pergerakan magma, tanah longsor besar, dan ledakan besar buatan manusia yang menghasilkan energi akustik frekuensi rendah.
+            </p>
+            
+            <div class="topic-image">
+              <i class="fas fa-wave-pulse"></i>
+            </div>
+            
+            <p>
+              Gelombang seismik dipelajari oleh seismolog, yang merekam gelombang menggunakan seismometer, hidrofon (di dalam air), atau akselerometer. Gelombang seismik dibedakan dari kebisingan seismik (getaran sekitar), yang merupakan getaran amplitudo rendah yang terus-menerus yang timbul dari berbagai sumber alami dan antropogenik.
+            </p>
+          </div>
+        </div>
+        
+        <div class="topic-card animate-on-scroll">
+          <div class="card-header">
+            <h3><i class="fas fa-project-diagram card-icon"></i> Jenis Gelombang Seismik</h3>
+            <p>Klasifikasi dan karakteristik gelombang</p>
+          </div>
+          <div class="card-content">
+            <p>
+              Terdapat 2 jenis gelombang utama:
+            </p>
+            
+            <div class="subtopics">
+              <div class="subtopic-card">
+                <h4><i class="fas fa-forward subtopic-icon"></i> Gelombang P (Primer)</h4>
+                <p>Gelombang kompresi yang merambat dengan cepat melalui material padat dan cair. Gelombang ini merupakan gelombang longitudinal yang menyebabkan partikel bergerak sejajar dengan arah rambat gelombang.</p>
+              </div>
+              
+              <div class="subtopic-card">
+                <h4><i class="fas fa-up-right-and-down-left-from-center subtopic-icon"></i> Gelombang S (Sekunder)</h4>
+                <p>Gelombang geser yang lebih lambat dan hanya merambat melalui material padat. Gelombang ini menyebabkan partikel bergerak tegak lurus terhadap arah rambat gelombang.</p>
+              </div>
+            </div>
+            
+            <div class="fact-box">
+              <p><strong>Fakta Penting:</strong> Perbedaan perilaku gelombang P dan S ketika melalui inti luar bumi yang cair membantu ilmuwan menentukan struktur internal bumi. Gelombang S tidak dapat melewati cairan, sementara gelombang P melambat saat melewati material cair.</p>
+            </div>
+            
+            <p>
+              Kecepatan perambatan gelombang seismik bergantung pada kepadatan dan elastisitas medium serta jenis gelombang. Kecepatan cenderung meningkat seiring dengan kedalaman melalui kerak dan mantel Bumi, tetapi menurun tajam dari mantel ke inti luar Bumi.
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
-
-    <!-- Topik Struktur Bumi -->
-    <section id="struktur-bumi" class="topic">
-      <h2>Struktur Bumi</h2>
-      <!-- Subtopik Kerak Bumi -->
-      <section class="subtopic">
-        <h3>Kerak Bumi</h3>
-        <p>
-          Kerak Bumi adalah lapisan terluar bumi yang
-          terbagi menjadi dua kategori, yaitu kerak samudera dan kerak benua. Kerak
-          samudra mempunyai ketebalan sekitar 5–10 km sedangkan kerak benua mempunyai
-          ketebalan sekitar 20–70 km. Penyusun kerak samudra yang utama adalah batuan
-          basal, sedangkan batuan penyusun kerak benua yang utama adalah granit, yang
-          tidak sepadat batuan basal.
+    
+    <!-- Struktur Bumi Section -->
+    <section id="struktur">
+      <div class="section-title">
+        <h2><i class="fas fa-layer-group"></i> Struktur Bumi</h2>
+        <p>Komposisi dan lapisan interior planet kita</p>
+      </div>
+      
+      <div class="topics-grid">
+        <div class="topic-card animate-on-scroll">
+          <div class="card-header">
+            <h3><i class="fas fa-mountain card-icon"></i> Kerak Bumi</h3>
+            <p>Lapisan terluar planet kita</p>
+          </div>
+          <div class="card-content">
+            <p>
+              Kerak Bumi adalah lapisan terluar bumi yang terbagi menjadi dua kategori, yaitu kerak samudera dan kerak benua. Kerak samudra mempunyai ketebalan sekitar 5–10 km sedangkan kerak benua mempunyai ketebalan sekitar 20–70 km.
+            </p>
+            
+            <div class="topic-image">
+              <i class="fas fa-water"></i>
+            </div>
+            
+            <p>
+              Penyusun kerak samudra yang utama adalah batuan basal, sedangkan batuan penyusun kerak benua yang utama adalah granit, yang tidak sepadat batuan basal. Kerak benua lebih tua, dengan beberapa bagian berusia lebih dari 4 miliar tahun, sementara kerak samudera jauh lebih muda dengan usia maksimal sekitar 200 juta tahun.
+            </p>
+            
+            <div class="fact-box">
+              <p><strong>Fakta Menarik:</strong> Titik terdalam di kerak samudera adalah Palung Mariana di Samudra Pasifik dengan kedalaman sekitar 11 km, lebih dalam daripada ketinggian Gunung Everest!</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="topic-card animate-on-scroll">
+          <div class="card-header">
+            <h3><i class="fas fa-fire card-icon"></i> Mantel Bumi</h3>
+            <p>Lapisan terbesar bumi</p>
+          </div>
+          <div class="card-content">
+            <p>
+              Mantel bumi merupakan lapisan yang menyelubungi inti bumi dan merupakan bagian terbesar dari bagian bumi sekitar 83,2 persen dari volume dan 67,8 persen dari keseluruhan masa bumi.
+            </p>
+            
+            <div class="topic-image">
+              <i class="fas fa-layer-group"></i>
+            </div>
+            
+            <p>
+              Mantel terbagi menjadi mantel atas dan mantel bawah. Mantel atas yang lebih dingin dan kaku bersama dengan kerak bumi membentuk litosfer. Di bawah litosfer terdapat astenosfer yang bersifat plastis dan memungkinkan pergerakan lempeng tektonik. Suhu mantel berkisar antara 500°C di dekat kerak hingga 4000°C di perbatasan dengan inti.
+            </p>
+            
+            <div class="subtopics">
+              <div class="subtopic-card">
+                <h4><i class="fas fa-arrows-up-down subtopic-icon"></i> Konveksi Mantel</h4>
+                <p>Material mantel yang panas naik ke permukaan, mendingin, lalu tenggelam kembali. Siklus konveksi ini menggerakkan lempeng tektonik di permukaan bumi.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="topic-card animate-on-scroll">
+          <div class="card-header">
+            <h3><i class="fas fa-circle-radiation card-icon"></i> Inti Bumi</h3>
+            <p>Pusat planet kita</p>
+          </div>
+          <div class="card-content">
+            <p>
+              Inti bumi terletak pada kedalaman sekitar 2900 km dari dasar kerak bumi sampai ke pusat bumi. Inti bumi dapat dipisahkan menjadi inti bumi bagian luar dan inti bumi bagian dalam.
+            </p>
+            
+            <div class="topic-image">
+              <i class="fas fa-atom"></i>
+            </div>
+            
+            <div class="subtopics">
+              <div class="subtopic-card">
+                <h4><i class="fas fa-fire-flame-curved subtopic-icon"></i> Inti Luar</h4>
+                <p>Inti bagian luar merupakan struktur cair yang terdiri dari besi dan nikel. Inti bagian luar ini berada di kedalaman 2.885-5.144 kilometer. Suhu pada lapisan ini mencapai 3.700°C. Aliran logam cair di inti luar menciptakan medan magnet bumi melalui efek dinamo.</p>
+              </div>
+              
+              <div class="subtopic-card">
+                <h4><i class="fas fa-gem subtopic-icon"></i> Inti Dalam</h4>
+                <p>Inti bagian dalam bumi berbentuk bola metal yang memiliki radius 1.220 kilometer. Suhu di inti bagian dalam bumi berkisar 4.300-5.400°C. Tekanan yang sangat tinggi (3,6 juta atmosfer) membuat besi dan nikel tetap dalam keadaan padat meskipun suhu sangat tinggi.</p>
+              </div>
+            </div>
+            
+            <div class="fact-box">
+              <p><strong>Fakta Menakjubkan:</strong> Inti dalam bumi tumbuh sekitar 1 mm per tahun saat logam cair membeku di permukaannya. Proses pembekuan ini melepaskan panas yang membantu menggerakkan konveksi di inti luar.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Interactive Section -->
+    <section class="interactive-section" id="interaktif">
+      <div class="interactive-content">
+        <h2 style="color: var(--accent); font-size: 2.5rem; margin-bottom: 1.5rem;">Model Interaktif Struktur Bumi</h2>
+        <p style="max-width: 700px; margin: 0 auto 2rem; font-size: 1.1rem;">
+          Jelajahi lapisan-lapisan bumi melalui model 3D interaktif ini. Lihat bagaimana gelombang seismik berperilaku berbeda ketika melewati berbagai lapisan bumi.
         </p>
-      </section>
-
-      <!-- Subtopik Mantel Bumi -->
-      <section class="subtopic">
-        <h3>Mantel Bumi</h3>
-        <p>
-          Mantel bumi merupakan lapisan yang menyelubungi
-          inti bumi dan merupakan bagian terbesar dari bagian bumi sekitar 83,2
-          persen dari volume dan 67,8 persen dari keseluruhan masa bumi.
-        </p>
-        <!-- Gambar ilustrasi; src tetap sama seperti semula -->
-        <img src="assets/gambar.jpg" class="illustration" alt="Ilustrasi Mantel Bumi" />
-      </section>
-
-      <!-- Subtopik Inti Bumi -->
-      <section class="subtopic">
-        <h3>Inti Bumi</h3>
-        <p>
-          Inti bumi terletak pada kedalaman sekitar 2900
-          km dari dasar kerak bumi sampai ke pusat bumi. Inti bumi dapat dipisahkan
-          menjadi inti bumi bagian luar dan inti bumi bagian dalam. Inti bagian luar
-          merupakan struktur cair yang terdiri dari besi dan nikel. Inti bagian luar
-          ini berada di kedalaman 2.885-5.144 kilometer. Suhu pada lapisan ini
-          mencapai 3.700 derajat Celcius. Sedangkan inti bagian dalam bumi berbentuk
-          bola metal yang memiliki radius 1.220 kilometer atau sekitar tiga per empat
-          ukuran bulan. Inti bagian dalam terletak di dalam bumi pada kedalaman
-          2.885-5.144 kilometer di bawah permukaan bumi. Suhu di inti bagian dalam
-          bumi berkisar 4.300-5.400 derajat Celcius. Suhu ini hampir sepanas suhu
-          permukaan matahari.
-        </p>
-      </section>
+        
+        <div class="earth-model">
+          <div class="earth-sphere">
+            <div class="crust">
+              <div class="layer-labels label-crust">Kerak Bumi</div>
+            </div>
+            <div class="mantle">
+              <div class="layer-labels label-mantle">Mantel</div>
+            </div>
+            <div class="core">
+              <div class="layer-labels label-core">Inti</div>
+            </div>
+          </div>
+        </div>
+        
+        <div style="margin-top: 2rem;">
+          <button id="waveBtn" style="background: var(--accent); color: white; border: none; padding: 0.8rem 2rem; border-radius: 50px; font-size: 1.1rem; cursor: pointer; transition: var(--transition);">
+            <i class="fas fa-wave-square"></i> Tampilkan Gelombang Seismik
+          </button>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Facts Section -->
+    <section class="facts-section">
+      <div class="section-title">
+        <h2><i class="fas fa-lightbulb"></i> Fakta Menarik Geologi</h2>
+        <p>Pengetahuan tambahan tentang bumi dan seismologi</p>
+      </div>
+      
+      <div class="facts-grid">
+        <div class="fact-card">
+          <div class="fact-icon">
+            <i class="fas fa-clock-rotate-left"></i>
+          </div>
+          <h4>Bumi yang Berdenyut</h4>
+          <p>Setiap hari terjadi sekitar 500.000 gempa bumi yang dapat dideteksi di seluruh dunia. Hanya sekitar 100.000 yang cukup kuat untuk dapat dirasakan, dan hanya 100 yang menyebabkan kerusakan.</p>
+        </div>
+        
+        <div class="fact-card">
+          <div class="fact-icon">
+            <i class="fas fa-temperature-high"></i>
+          </div>
+          <h4>Panas yang Ekstrem</h4>
+          <p>Suhu di inti dalam bumi (5.400°C) hampir setara dengan suhu permukaan matahari (5.500°C). Tekanan di pusat bumi mencapai 3,6 juta kali tekanan atmosfer di permukaan laut.</p>
+        </div>
+        
+        <div class="fact-card">
+          <div class="fact-icon">
+            <i class="fas fa-shield"></i>
+          </div>
+          <h4>Pelindung Magnetik</h4>
+          <p>Medan magnet bumi yang dihasilkan oleh inti luar yang cair melindungi kita dari radiasi matahari yang berbahaya. Tanpa medan magnet ini, kehidupan di bumi tidak mungkin ada.</p>
+        </div>
+      </div>
     </section>
   </main>
 
+  <!-- Footer -->
   <footer>
-    <p>terimakasih atas perhatiannya, dan mohon maaf atas segala kesalahan pengucapan</p>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Tentang Kami</h3>
+        <p>Website ini dibuat untuk memberikan pemahaman tentang getaran-getaran alam dan struktur interior bumi melalui konten yang edukatif dan interaktif.</p>
+        <div class="footer-social">
+          <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Navigasi Cepat</h3>
+        <ul class="footer-links">
+          <li><a href="#home"><i class="fas fa-chevron-right"></i> Beranda</a></li>
+          <li><a href="#gempa"><i class="fas fa-chevron-right"></i> Gempa Bumi</a></li>
+          <li><a href="#gelombang"><i class="fas fa-chevron-right"></i> Gelombang Seismik</a></li>
+          <li><a href="#struktur"><i class="fas fa-chevron-right"></i> Struktur Bumi</a></li>
+          <li><a href="#interaktif"><i class="fas fa-chevron-right"></i> Model Interaktif</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Kontak & Sumber</h3>
+        <ul class="footer-links">
+          <li><a href="#"><i class="fas fa-book"></i> Referensi Ilmiah</a></li>
+          <li><a href="#"><i class="fas fa-graduation-cap"></i> Materi Pendidikan</a></li>
+          <li><a href="#"><i class="fas fa-envelope"></i> geo-science@edu.id</a></li>
+          <li><a href="#"><i class="fas fa-phone"></i> +62 123 456 789</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="copyright">
+      <p>Terima kasih atas perhatiannya, dan mohon maaf atas segala kesalahan pengucapan</p>
+      <p style="margin-top: 1rem;">&copy; 2023 GeoScience. Hak Cipta Dilindungi. Dibuat oleh Muhammad Harrist Alfarisy dan Ahmad Fadhil Ramadhan</p>
+    </div>
   </footer>
 
   <script>
-    // Fade-in tiap section saat scroll
-    document.addEventListener('DOMContentLoaded', () => {
-      const sections = document.querySelectorAll('section.topic, section.subtopic');
-      const observer = new IntersectionObserver((entries, obs) => {
+    // Animasi saat scroll
+    document.addEventListener('DOMContentLoaded', function() {
+      // Animasi elemen saat muncul di viewport
+      const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
-            obs.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.2, rootMargin: "0px 0px -50px 0px" });
-      sections.forEach(sec => observer.observe(sec));
+      }, { threshold: 0.1 });
+      
+      document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        observer.observe(el);
+      });
+      
+      // Animasi tombol gelombang seismik
+      const waveBtn = document.getElementById('waveBtn');
+      if (waveBtn) {
+        waveBtn.addEventListener('click', function() {
+          this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mensimulasikan Gelombang...';
+          
+          setTimeout(() => {
+            this.innerHTML = '<i class="fas fa-check"></i> Gelombang Berhasil Disimulasikan!';
+            this.style.background = 'var(--success)';
+            
+            // Animasi gelombang
+            const earthSphere = document.querySelector('.earth-sphere');
+            earthSphere.style.animation = 'rotateEarth 15s infinite linear, wavePulse 2s 3';
+            
+            // Tambahkan kelas animasi untuk gelombang
+            const crust = document.querySelector('.crust');
+            crust.classList.add('wave-animation');
+            
+            setTimeout(() => {
+              this.innerHTML = '<i class="fas fa-wave-square"></i> Tampilkan Gelombang Seismik';
+              this.style.background = 'var(--accent)';
+              crust.classList.remove('wave-animation');
+            }, 4000);
+          }, 1000);
+        });
+      }
+      
+      // Tambahkan style untuk animasi gelombang
+      const style = document.createElement('style');
+      style.innerHTML = `
+        @keyframes wavePulse {
+          0% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7); }
+          70% { box-shadow: 0 0 0 20px rgba(56, 189, 248, 0); }
+          100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
+        }
+        
+        .wave-animation {
+          animation: wavePulse 2s ease infinite;
+        }
+      `;
+      document.head.appendChild(style);
     });
   </script>
-
 </body>
 </html>
